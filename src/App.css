@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  background: #eac2f1 ;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+}
+header {
+  font-size: 4rem;
+  min-height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+select {
+  color: #bb47ff;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  width: 12rem;
+  height: 4rem;
+  padding: 1rem;
+  position: relative;
+}

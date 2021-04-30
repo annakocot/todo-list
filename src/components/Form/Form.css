@@ -1,0 +1,23 @@
+form {
+  min-height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 3rem;
+  border: none;
+  background: white;
+}
+form button {
+  color: #bb47ff;
+  background: #f7fffe;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+form button:hover {
+  background: #bb47ff;
+  color: white;
+}

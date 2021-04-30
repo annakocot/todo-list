@@ -1,0 +1,44 @@
+.todo {
+  margin: 0.5rem;
+  background: white;
+  font-size: 2.5rem;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 1s ease;
+}
+.todo-item {
+  padding: 0rem 0.5rem;
+  flex: 1;
+}
+.filter-todo {
+  padding: 1rem;
+  margin: 1rem;
+}
+.delete-btn,
+.complete-btn,
+.edit-btn {
+  background:#ec7a7a;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 2.5rem;
+}
+.edit-btn {
+  background: #bb47ff;
+}
+.complete-btn {
+  background: rgb(113, 216, 127);
+}
+.fa-edit,
+.fa-check,
+.fa-trash-alt {
+  pointer-events: none;
+  outline: none;
+}
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
