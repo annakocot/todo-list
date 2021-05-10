@@ -1,29 +1,22 @@
-import React from 'react';
-import uuid from 'react-uuid';
-import './Form.css';
+import React from "react";
+import "./Form.css";
 
-const Form = ({ inputText, setInputText, todos, setTodos, setStatus, filterHandler }) => {
-  const inputTextHandler = (e) => {
-      console.log(e.target.value);
-      setInputText(e.target.value);
-  };
+const Form = ({ inputText, addTodo, inputTextHandler, statusHandler }) => {
   const submitTodoHandler = (e) => {
     e.preventDefault();
-    if (inputText !== '' && inputText !== null) {
-      setTodos([...todos, { text: inputText, completed: false, id: uuid() }]);
-      setInputText('');
-    }
-  };
-  const statusHandler = (e) => {
-    setStatus(e.target.value);
-    filterHandler();
+    if (inputText !== "" && inputText !== null) addTodo();
   };
 
   return (
     <form>
-      <input value={inputText} onChange={inputTextHandler} type="text" className="todo-input"/>
+      <input
+        value={inputText}
+        onChange={inputTextHandler}
+        type="text"
+        className="todo-input"
+      />
       <button onClick={submitTodoHandler} className="todo-button" type="submit">
-      <span className="fas fa-plus"></span>
+        <span className="fas fa-plus"></span>
       </button>
       <div>
         <select onChange={statusHandler} name="todos" className="filter-todo">
@@ -34,6 +27,6 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus, filterHandl
       </div>
     </form>
   );
-}
+};
 
 export default Form;

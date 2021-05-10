@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import uuid from "react-uuid";
 import "./App.css";
 import Form from "./components/Form/Form";
 import TodoList from "./components/TodoList/TodoList";
@@ -9,40 +10,43 @@ function App() {
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-  const filterHandler = () => {
-    switch (status) {
-      case "completed":
-        setFilteredTodos(todos.filter((todo) => todo.completed === true));
-        break;
-      case "uncompleted":
-        setFilteredTodos(todos.filter((todo) => todo.completed === false));
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  };
-
-  const saveLocalTodos = () => {
-      localStorage.setItem("todos", JSON.stringify(todos));
-  };
-  const getLocalTodos = () => {
-    if (localStorage.getItem("todos") === null) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem('todos'));
-      setTodos(todoLocal);
-    }
-  };
+  useEffect(() => localStorage.setItem("todos", JSON.stringify(todos)), [
+    todos,
+  ]);
 
   useEffect(() => {
-    getLocalTodos();
+    (() => {
+      if (localStorage.getItem("todos") === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+      } else {
+        let todoLocal = JSON.parse(localStorage.getItem("todos"));
+        setTodos(todoLocal);
+      }
+    })();
   }, []);
 
   useEffect(() => {
+    const filterHandler = () => {
+      switch (status) {
+        case "completed":
+          setFilteredTodos(todos.filter((todo) => todo.completed === true));
+          break;
+        case "uncompleted":
+          setFilteredTodos(todos.filter((todo) => todo.completed === false));
+          break;
+        default:
+          setFilteredTodos(todos);
+          break;
+      }
+    };
+
     filterHandler();
-    saveLocalTodos();
-  }, [todos, status]);
+  }, [status, todos]);
+
+  const addTodo = () => {
+    setTodos([...todos, { text: inputText, completed: false, id: uuid() }]);
+    setInputText("");
+  };
 
   return (
     <div className="App">
@@ -51,12 +55,9 @@ function App() {
       </header>
       <Form
         inputText={inputText}
-        setInputText={setInputText}
-        todos={todos}
-        setTodos={setTodos}
-        status={status}
-        setStatus={setStatus}
-        filterHandler={filterHandler}
+        addTodo={addTodo}
+        inputTextHandler={(e) => setInputText(e.target.value)}
+        statusHandler={(e) => setStatus(e.target.value)}
       />
       <TodoList
         todos={todos}
